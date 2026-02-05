@@ -1,0 +1,58 @@
+
+---Downloaded files---
+The import files for: Real Places were successfully downloaded!
+Initial max execution time = 3000
+Files info:
+Site URL = https://obligelabs.com/projetos/vm
+Data file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/content.xml
+Widget file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/widgets.wie
+Customizer file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/inspiry-customizer.dat
+Redux files:
+inspiry_options -> /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/inspiry_options.json 
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Barra Lateral Padrão : 
+
+Pesquisar - No Title - Imported
+Categorias - No Title - Imported
+Posts recentes - No Title - Imported
+
+Barra Lateral das Páginas : 
+
+lidd_mc_widget - Calculate Mortgage Payments - Site does not support widget
+List Custom Taxonomy - Locations - Imported
+List Custom Taxonomy - Property Types - Imported
+
+Lista lateral de lista de imóveis : 
+
+Pesquisa de imóveis IMOBILES - Find Your Home - Imported
+Imóveis de destaque IMOBILES - Featured Properties - Imported
+
+Barra lateral Grid das propriedades : 
+
+Pesquisa de imóveis IMOBILES - Find Your Home - Imported
+Imóveis de destaque IMOBILES - Featured Properties - Imported
+
+Rodapé Terceira Coluna : 
+
+List Custom Taxonomy - Property Statuses - Imported
+
+Rodapé Quarta Coluna : 
+
+Inspiry Social Media Icons - Connect With Us - Imported
+
+
+
+---Importing Redux settings---
+Redux settings import for: inspiry_options finished successfully!
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdi/after_import---
+

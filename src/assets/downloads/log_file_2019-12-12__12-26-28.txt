@@ -1,0 +1,54 @@
+
+---Downloaded files---
+The import files for: Real Places were successfully downloaded!
+Initial max execution time = 3000
+Files info:
+Site URL = https://obligelabs.com/projetos/vm
+Data file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/content.xml
+Widget file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/widgets.wie
+Customizer file = /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/inspiry-customizer.dat
+Redux files:
+inspiry_options -> /home/obligelabs/public_html/projetos/vm/wp-content/themes/inspiry-real-places/inc/demo-import/default-demo/inspiry_options.json 
+
+
+---Importing widgets---
+Barra Lateral Padrão : 
+
+Pesquisar - No Title - Widget already exists
+Categorias - No Title - Widget already exists
+Posts recentes - No Title - Widget already exists
+
+Barra Lateral das Páginas : 
+
+lidd_mc_widget - Calculate Mortgage Payments - Site does not support widget
+List Custom Taxonomy - Locations - Widget already exists
+List Custom Taxonomy - Property Types - Widget already exists
+
+Lista lateral de lista de imóveis : 
+
+Pesquisa de imóveis IMOBILES - Find Your Home - Widget already exists
+Imóveis de destaque IMOBILES - Featured Properties - Widget already exists
+
+Barra lateral Grid das propriedades : 
+
+Pesquisa de imóveis IMOBILES - Find Your Home - Widget already exists
+Imóveis de destaque IMOBILES - Featured Properties - Widget already exists
+
+Rodapé Terceira Coluna : 
+
+List Custom Taxonomy - Property Statuses - Widget already exists
+
+Rodapé Quarta Coluna : 
+
+Inspiry Social Media Icons - Connect With Us - Widget already exists
+
+
+
+---Importing Redux settings---
+Redux settings import for: inspiry_options finished successfully!
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdi/after_import---
+
