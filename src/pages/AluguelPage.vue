@@ -30,7 +30,7 @@ import img5 from '../assets/img-6-imoveis-alugueis.jpg'
 import img6 from '../assets/img-7-imoveis-alugueis.png'
 import img7 from '../assets/img-5.jpeg'
 
-
+// import img8 from '../assets/img-8.jpeg'
 
 
 const imoveis = [
