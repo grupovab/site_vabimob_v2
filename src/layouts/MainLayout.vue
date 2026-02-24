@@ -27,7 +27,7 @@
                   to="/"
                 />
               </div>
-              <div class="col-md bg-red">
+              <div class="col-md">
                 <div class="">
                   <div class="flex justify-right items-center q-pa-sm">
                     <a :href="whatsLink" target="_blank" class="text-dark no-decoration">
