@@ -10,6 +10,7 @@ const routes = [
       { path: 'blog', component: () => import('src/pages/BlogPage.vue') },
       { path: 'blog/:slug', component: () => import('pages/BlogPostPage.vue') },
       { path: 'contato', component: () => import('pages/ContatoPage.vue') },
+      { path: 'aluguel/:slug', component: () => import("src/pages/ImovelDetalhePage.vue") },
     ],
   },
 

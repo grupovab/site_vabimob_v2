@@ -43,16 +43,16 @@
 
                   <q-separator />
 
-                 <div class="">
-                   <q-tabs align="left" active-color="primary" indicator-color="primary">
-                    <q-route-tab to="/" label="Início" />
-                    <q-route-tab to="/quem-somos" label="Quem somos" />
-                    <q-route-tab to="/compra" label="Compra" />
-                    <q-route-tab to="/aluguel" label="Aluguel" />
-                    <q-route-tab to="/blog" label="Blog" />
-                    <q-route-tab to="/contato" label="Contato" />
-                  </q-tabs>
-                 </div>
+                  <div class="">
+                    <q-tabs align="left" active-color="primary" indicator-color="primary">
+                      <q-route-tab to="/" label="Início" />
+                      <q-route-tab to="/quem-somos" label="Quem somos" />
+                      <q-route-tab to="/compra" label="Compra" />
+                      <q-route-tab to="/aluguel" label="Aluguel" />
+                      <q-route-tab to="/blog" label="Blog" />
+                      <q-route-tab to="/contato" label="Contato" />
+                    </q-tabs>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,30 +99,42 @@
       <router-view />
     </q-page-container>
 
-    <div class="newsletter">
-      <div class="container row items-center q-col-gutter-md">
-        <div class="col-12 col-md-4 text-white text-h6">Novidades</div>
+    <div class="newsletter row justify-center">
+      <div class="col-10">
+        <div class="row items-center q-col-gutter-x-sm">
+          <div class="col-12 col-md-4 text-white text-h6">Novidades</div>
 
-        <div class="col-12 col-md-8">
-          <div class="row no-wrap">
-            <q-input outlined dense placeholder="Seu Nome" class="col" bg-color="white" />
+          <div class="col-12 col-md-8">
+            <div class="row no-wrap">
+              <q-input outlined dense placeholder="Seu Nome" class="col" bg-color="white" />
 
-            <q-input outlined dense placeholder="Seu E-mail" class="col q-mx-sm" bg-color="white" />
+              <q-input
+                outlined
+                dense
+                placeholder="Seu E-mail"
+                class="col q-mx-sm"
+                bg-color="white"
+              />
 
-            <q-btn label="INSCREVER-SE" class="btn-newsletter" unelevated />
+              <q-btn label="INSCREVER-SE" class="btn-newsletter" unelevated />
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer bg-secondary text-white">
-      <div class="container">
-        <div class="row q-col-gutter-xl">
+    <footer class="footer bg-secondary text-white row justify-center">
+      <div class="col-10">
+        <div class="row q-col-gutter-x-sm">
           <!-- LOGO -->
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-3">
             <div class="row items-center q-mb-md">
-              <q-img src="./../assets/logo-vabimob-branco.svg" class="q-mr-sm" />
+              <q-img
+                src="./../assets/logo-vabimob-branco.svg"
+                class="q-mr-sm"
+                style="width: 150px"
+              />
             </div>
 
             <p class="text-caption">
@@ -131,23 +143,27 @@
           </div>
 
           <!-- NAVEGAÇÃO -->
-          <div class="col-12 col-md-5">
+          <div class="col-12 col-md-6">
             <p class="text-bold q-mb-sm">NAVEGAÇÃO</p>
 
-            <div class="row q-col-gutter-md">
-              <div class="col-6 col-sm-4">
-                <p>INÍCIO</p>
-                <p>QUEM SOMOS</p>
+            <div class="row">
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" to="/" label="Início" />
               </div>
-
-              <div class="col-6 col-sm-4">
-                <p>COMPRA</p>
-                <p>ALUGUEL</p>
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" no-wrap to="/quem-somos" label="Quem somos" />
               </div>
-
-              <div class="col-6 col-sm-4">
-                <p>BLOG</p>
-                <p>CONTATO</p>
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" to="/compra" label="Compra" />
+              </div>
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" to="/aluguel" label="Aluguel" />
+              </div>
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" to="/blog" label="Blog" />
+              </div>
+              <div class="col">
+                <q-btn no-caps  flat class="full-width" to="/contato" label="Contato" />
               </div>
             </div>
           </div>
@@ -177,7 +193,6 @@ const whatsLink = 'https://wa.me/5511996653427'
 
 <style scoped>
 .container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
