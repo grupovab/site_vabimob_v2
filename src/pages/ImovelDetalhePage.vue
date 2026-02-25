@@ -15,11 +15,7 @@
                 height="420px"
                 class="bg-grey-2"
               >
-                <q-carousel-slide
-                  v-for="(img, idx) in imagens"
-                  :key="idx"
-                  :name="idx"
-                >
+                <q-carousel-slide v-for="(img, idx) in imagens" :key="idx" :name="idx">
                   <q-img :src="img" class="fit" />
                 </q-carousel-slide>
 
@@ -34,10 +30,10 @@
           <div class="col-12 col-md-5">
             <q-card flat class="card-info q-pa-lg">
               <div class="text-h6 text-weight-bold text-white">
-                {{ imovel?.title || "Imóvel" }}
+                {{ imovel?.title || 'Imóvel' }}
               </div>
 
-              <div class="text-primary q-mt-xs text-weight-medium">Ofertas</div>
+              <div class="text-light-blue-12 q-mt-xs text-weight-medium">Ofertas</div>
 
               <!-- Só mostra o que existe -->
               <div class="row q-col-gutter-md q-mt-md">
@@ -46,8 +42,13 @@
                   :key="idx"
                   :class="`col-12 col-md-${item.col || 6}`"
                 >
-                  <div class="label">{{ item.label }}</div>
-                  <div class="valor">{{ item.value }}</div>
+                  <div class="info-linha">
+                    <q-icon :name="item.icon" size="18px" class="info-icone" />
+                    <div>
+                      <div class="label">{{ item.label }}</div>
+                      <div class="valor">{{ item.value }}</div>
+                    </div>
+                  </div>
                 </div>
 
                 <div v-if="infoTopo.length === 0" class="col-12 text-white">
@@ -133,22 +134,13 @@
                 {{ dados.endereco }}
               </div>
 
-              <div
-                v-if="imovel?.content"
-                class="conteudo-html"
-                v-html="imovel.content"
-              ></div>
+              <div v-if="imovel?.content" class="conteudo-html" v-html="imovel.content"></div>
 
-              <div v-else class="text-grey-7">
-                Sem descrição cadastrada.
-              </div>
+              <div v-else class="text-grey-7">Sem descrição cadastrada.</div>
             </section>
 
             <!-- IPTU / Condomínio (só aparece se existir algo) -->
-            <div
-              v-if="dados.iptu || dados.condominioTaxa"
-              class="row q-col-gutter-xl q-mt-xl"
-            >
+            <div v-if="dados.iptu || dados.condominioTaxa" class="row q-col-gutter-xl q-mt-xl">
               <div v-if="dados.iptu" class="col-12 col-md-6">
                 <div class="titulo-mini">
                   <q-icon name="receipt_long" />
@@ -215,9 +207,7 @@
                   />
                 </div>
 
-                <div v-else class="q-pa-md text-grey-7">
-                  Sem coordenadas no JSON (REAL_HOMES_property_location).
-                </div>
+                <div v-else class="q-pa-md text-grey-7">Sem coordenadas disponíveis.</div>
               </q-card>
             </div>
           </div>
@@ -227,9 +217,7 @@
             <!-- Form -->
             <q-card flat bordered class="q-pa-lg bg-primary text-white">
               <div class="text-subtitle1 text-weight-bold">Agendar visita</div>
-              <div class="text-caption q-mb-md">
-                Ligue-nos ou preencha o formulário
-              </div>
+              <div class="text-caption q-mb-md">Ligue-nos ou preencha o formulário</div>
 
               <div class="row items-center q-gutter-sm q-mb-sm">
                 <q-icon name="call" />
@@ -305,22 +293,42 @@
                   <q-img :src="semelhanteAtual.thumb" ratio="16/9" />
                   <div class="q-pa-md">
                     <div class="text-weight-bold">{{ semelhanteAtual.title }}</div>
-                    <div class="text-primary q-mt-xs">Ofertas</div>
+                    <div class="text-light-blue-12 q-mt-xs">Ofertas</div>
 
                     <div class="text-grey-8 q-mt-sm">
-                      <span v-if="String(semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '').trim()">
+                      <span
+                        v-if="
+                          String(semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '').trim()
+                        "
+                      >
                         Quartos: {{ semelhanteAtual.metas.REAL_HOMES_property_bedrooms }}
                       </span>
                       <span
-                        v-if="String(semelhanteAtual?.metas?.REAL_HOMES_property_bathrooms || '').trim()"
+                        v-if="
+                          String(semelhanteAtual?.metas?.REAL_HOMES_property_bathrooms || '').trim()
+                        "
                       >
-                        <span v-if="String(semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '').trim()"> · </span>
+                        <span
+                          v-if="
+                            String(
+                              semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '',
+                            ).trim()
+                          "
+                        >
+                          ·
+                        </span>
                         Banheiros: {{ semelhanteAtual.metas.REAL_HOMES_property_bathrooms }}
                       </span>
 
                       <span
-                        v-if="!String(semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '').trim() &&
-                              !String(semelhanteAtual?.metas?.REAL_HOMES_property_bathrooms || '').trim()"
+                        v-if="
+                          !String(
+                            semelhanteAtual?.metas?.REAL_HOMES_property_bedrooms || '',
+                          ).trim() &&
+                          !String(
+                            semelhanteAtual?.metas?.REAL_HOMES_property_bathrooms || '',
+                          ).trim()
+                        "
                       >
                         Sem dados adicionais.
                       </span>
@@ -365,56 +373,82 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref, watchEffect } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useQuasar } from "quasar";
-import imoveis from "src/data/imoveis.json";
+import { computed, reactive, ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
+import imoveis from 'src/data/imoveis.json'
 
-const $q = useQuasar();
-const route = useRoute();
-const router = useRouter();
+const $q = useQuasar()
+const route = useRoute()
+const router = useRouter()
 
-const slug = computed(() => String(route.params.slug || ""));
-const imovel = computed(() => imoveis.find((i) => i.slug === slug.value));
+const slug = computed(() => String(route.params.slug || ''))
+const imovel = computed(() => imoveis.find((i) => i.slug === slug.value))
 
-const naoEncontrou = ref(false);
+const naoEncontrou = ref(false)
 watchEffect(() => {
-  naoEncontrou.value = !!slug.value && !imovel.value;
-});
+  naoEncontrou.value = !!slug.value && !imovel.value
+})
 
-const slide = ref(0);
+const slide = ref(0)
 
 const imagens = computed(() => {
-  if (!imovel.value) return [];
-  const lista = [imovel.value.thumb, ...(imovel.value.gallery || [])].filter(Boolean);
-  return Array.from(new Set(lista));
-});
+  if (!imovel.value) return []
+  const lista = [imovel.value.thumb, ...(imovel.value.gallery || [])].filter(Boolean)
+  return Array.from(new Set(lista))
+})
 
 function meta(chave) {
-  const v = imovel.value?.metas?.[chave];
-  return String(v ?? "").trim();
+  const v = imovel.value?.metas?.[chave]
+  return String(v ?? '').trim()
 }
 
 function temValor(v) {
-  return String(v ?? "").trim().length > 0;
+  return String(v ?? '').trim().length > 0
 }
 
 const dados = computed(() => {
-  const idImovel = meta("REAL_HOMES_property_id");
-  const quartos = meta("REAL_HOMES_property_bedrooms");
-  const banheiros = meta("REAL_HOMES_property_bathrooms");
-  const area = meta("REAL_HOMES_property_size") || meta("REAL_HOMES_property_size_postfix");
-  const endereco = meta("REAL_HOMES_property_address");
+  const idImovel = meta('REAL_HOMES_property_id')
+  const quartos = meta('REAL_HOMES_property_bedrooms')
+  const banheiros = meta('REAL_HOMES_property_bathrooms')
+  const area = meta('REAL_HOMES_property_size') || meta('REAL_HOMES_property_size_postfix')
+  const endereco = meta('REAL_HOMES_property_address')
 
-  const iptu = meta("iptu");
-  const condominioTaxa = meta("taxa_de_condominio");
-  const condominioTexto = meta("condominio");
+  const iptu = meta('iptu')
+  const condominioTaxa = meta('taxa_de_condominio')
+  const condominioTexto = meta('condominio')
 
-  const proxTransporte = meta("proximidades_transporte_publico");
-  const proxMuseus = meta("proximidades_museus_teatro_show");
+  const proxTransporte = meta('proximidades_transporte_publico')
+  const proxMuseus = meta('proximidades_museus_teatro_show')
 
-  const tipoOperacao = String(imovel.value?.tipo || "").toLowerCase();
-  const operacaoLabel = tipoOperacao === "aluguel" ? "Aluguel" : (tipoOperacao || "");
+  const tipoOperacao = String(imovel.value?.tipo || '').toLowerCase()
+  const operacaoLabel = tipoOperacao === 'aluguel' ? 'Aluguel' : tipoOperacao || ''
+
+  // ✅ “Tipo” (se você tiver no JSON, pode mudar a chave)
+  // se não tiver, a gente tenta inferir pelo título (loja vs apartamento)
+  const tipoTexto =
+    meta('REAL_HOMES_property_type') ||
+    (String(imovel.value?.title || '')
+      .toLowerCase()
+      .includes('loja')
+      ? 'Loja, Loja em edifício'
+      : 'Apartamento')
+
+  // ✅ “Localização” curtinha (ex: "Centro, SP")
+  // se não tiver, tenta tirar do endereço
+  const localizacaoTexto =
+    meta('bairro') ||
+    (() => {
+      const a = endereco
+      if (!a) return ''
+      // tenta pegar “- algo - São Paulo/SP”
+      const parts = a
+        .split('-')
+        .map((x) => x.trim())
+        .filter(Boolean)
+      const bairro = parts[1] || ''
+      return bairro ? `${bairro}, SP` : 'São Paulo, SP'
+    })()
 
   return {
     idImovel,
@@ -428,99 +462,144 @@ const dados = computed(() => {
     proxTransporte,
     proxMuseus,
     operacaoLabel,
-  };
-});
-
+    tipoTexto,
+    localizacaoTexto,
+  }
+})
 const infoTopo = computed(() => {
   return [
-    { label: "Código do imóvel", value: dados.value.idImovel, mostrar: temValor(dados.value.idImovel) },
-    { label: "Área", value: dados.value.area, mostrar: temValor(dados.value.area) },
-    { label: "Quartos", value: dados.value.quartos, mostrar: temValor(dados.value.quartos) },
-    { label: "Banheiros", value: dados.value.banheiros, mostrar: temValor(dados.value.banheiros) },
-    { label: "Operação", value: dados.value.operacaoLabel, mostrar: temValor(dados.value.operacaoLabel) },
-    { label: "Endereço", value: dados.value.endereco, mostrar: temValor(dados.value.endereco), col: 12 },
-  ].filter((x) => x.mostrar);
-});
-
+    {
+      label: 'Código do imóvel',
+      value: dados.value.idImovel,
+      icon: 'tag',
+      mostrar: temValor(dados.value.idImovel),
+    },
+    {
+      label: 'Área',
+      value: dados.value.area,
+      icon: 'crop_square',
+      mostrar: temValor(dados.value.area),
+    },
+    {
+      label: 'Quartos',
+      value: dados.value.quartos,
+      icon: 'bed',
+      mostrar: temValor(dados.value.quartos),
+    },
+    {
+      label: 'Banheiros',
+      value: dados.value.banheiros,
+      icon: 'bathtub',
+      mostrar: temValor(dados.value.banheiros),
+    },
+    {
+      label: 'Tipo',
+      value: dados.value.tipoTexto,
+      icon: 'apartment',
+      mostrar: temValor(dados.value.tipoTexto),
+    },
+    {
+      label: 'Operação',
+      value: dados.value.operacaoLabel,
+      icon: 'local_offer',
+      mostrar: temValor(dados.value.operacaoLabel),
+    },
+    {
+      label: 'Localização',
+      value: dados.value.localizacaoTexto,
+      icon: 'place',
+      mostrar: temValor(dados.value.localizacaoTexto),
+    },
+    {
+      label: 'Endereço',
+      value: dados.value.endereco,
+      icon: 'location_on',
+      mostrar: temValor(dados.value.endereco),
+      col: 12,
+    },
+  ].filter((x) => x.mostrar)
+})
 // MAPA
-const localRaw = computed(() => meta("REAL_HOMES_property_location"));
+const localRaw = computed(() => meta('REAL_HOMES_property_location'))
 const coords = computed(() => {
-  const p = String(localRaw.value || "").split(",").map((x) => x.trim());
-  const lat = Number(p[0]);
-  const lng = Number(p[1]);
-  const zoom = Number(p[2] || 14);
-  return { lat, lng, zoom };
-});
+  const p = String(localRaw.value || '')
+    .split(',')
+    .map((x) => x.trim())
+  const lat = Number(p[0])
+  const lng = Number(p[1])
+  const zoom = Number(p[2] || 14)
+  return { lat, lng, zoom }
+})
 
 const temCoordenadas = computed(
-  () => Number.isFinite(coords.value.lat) && Number.isFinite(coords.value.lng)
-);
+  () => Number.isFinite(coords.value.lat) && Number.isFinite(coords.value.lng),
+)
 
 const mapaSrc = computed(() => {
-  const { lat, lng, zoom } = coords.value;
-  return `https://maps.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
-});
+  const { lat, lng, zoom } = coords.value
+  return `https://maps.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`
+})
 
 function abrirRuaNoGoogle() {
-  if (!temCoordenadas.value) return;
-  const { lat, lng } = coords.value;
+  if (!temCoordenadas.value) return
+  const { lat, lng } = coords.value
   window.open(
     `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`,
-    "_blank"
-  );
+    '_blank',
+  )
 }
 
 // 360
-const abrir360 = ref(false);
-const tour360Html = computed(() => meta("REAL_HOMES_360_virtual_tour"));
+const abrir360 = ref(false)
+const tour360Html = computed(() => meta('REAL_HOMES_360_virtual_tour'))
 
 // FORM
 const form = reactive({
-  nome: "",
-  email: "",
-  telefone: "",
-  mensagem: "",
-});
+  nome: '',
+  email: '',
+  telefone: '',
+  mensagem: '',
+})
 
 function enviarMock() {
-  $q.notify({ type: "positive", message: "Mensagem enviada (mock). Depois você liga no backend." });
+  $q.notify({ type: 'positive', message: 'Mensagem enviada (mock). Depois você liga no backend.' })
 }
 
 // Semelhantes
 const semelhantes = computed(() => {
-  if (!imovel.value) return [];
+  if (!imovel.value) return []
   const mesmaOperacao = imoveis.filter(
-    (x) => x.slug !== imovel.value.slug && x.tipo === imovel.value.tipo
-  );
-  return mesmaOperacao.length ? mesmaOperacao : imoveis.filter((x) => x.slug !== imovel.value.slug);
-});
+    (x) => x.slug !== imovel.value.slug && x.tipo === imovel.value.tipo,
+  )
+  return mesmaOperacao.length ? mesmaOperacao : imoveis.filter((x) => x.slug !== imovel.value.slug)
+})
 
-const indiceSemelhante = ref(0);
+const indiceSemelhante = ref(0)
 watchEffect(() => {
-  indiceSemelhante.value = 0;
-});
+  indiceSemelhante.value = 0
+})
 
-const semelhanteAtual = computed(() => semelhantes.value[indiceSemelhante.value] || null);
+const semelhanteAtual = computed(() => semelhantes.value[indiceSemelhante.value] || null)
 
 function voltarSemelhante() {
-  indiceSemelhante.value = Math.max(0, indiceSemelhante.value - 1);
+  indiceSemelhante.value = Math.max(0, indiceSemelhante.value - 1)
 }
 
 function avancarSemelhante() {
-  indiceSemelhante.value = Math.min(semelhantes.value.length - 1, indiceSemelhante.value + 1);
+  indiceSemelhante.value = Math.min(semelhantes.value.length - 1, indiceSemelhante.value + 1)
 }
 
 function irParaImovel(slugDestino) {
-  router.push(`/imovel/${slugDestino}`);
+  router.push(`/imovel/${slugDestino}`)
 }
 
 function irPara(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 function imprimir() {
-  window.print();
+  window.print()
 }
 </script>
 
@@ -568,5 +647,15 @@ function imprimir() {
 
 .conteudo-html :deep(ul) {
   padding-left: 18px;
+}
+.info-linha {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.info-icone {
+  color: #27c5ff; /* mesmo tom “ciano” da imagem */
+  margin-top: 2px;
 }
 </style>
